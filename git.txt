@@ -31,8 +31,8 @@ add (nome do local) (caminho)
 git clone (caminho) para clonar o caminho para o diretorio atual
 git clone (caminho) nome da pasta
 
-git pull (nome do local) (nome da query) para receber os arquivos
-git push (nome do local) (noma da query) para enviar os arquivos 
+git pull (nome do local) (nome da branch) para receber os arquivos
+git push (nome do local) (nome da branch) para enviar os arquivos 
 -u atalho
 
 git branch (nome do branch)
