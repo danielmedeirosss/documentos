@@ -1,0 +1,29 @@
+SEGURANÇA  da infrmação 
+
+AREAS 
+GESTÃO
+DEFENSIVA
+OFENSIVA
+Bug Hunter HackerOne Bug Crowd
+INVESTIGAÇÃO
+DESENVOLVIMENTO
+ANALISE DE MALWARE
+PESQUISA 
+MONITORAMENTO
+
+Pilares da Segurança CID
+Confidencialidade apenas acessar a informação quem tem o acesso
+integridade garantir que a informação sempre tenha a caractetisca original
+Disponibilidade
+
+CONTROLE De informação
+
+
+FISICO portas,blindagem,paredes,guardar/ segurança, para raio, proteção contra incendio 
+
+logico Criptografia, IDS/IPS,WAF,Firewall
+
+Administrativo  politicas,NDA NON acordo de não divulgação, processos operacionais 
+
+
+

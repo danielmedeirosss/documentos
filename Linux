@@ -1,0 +1,115 @@
+repositorios de pacote, aonde o apt-get busca os pacotes
+
+apt-get remove nome do pacote  serve para remover o pacote
+apt-get purge nomedopacote serve para remover o pacote e as configurações adicionais junto
+
+/etc/apt/sources.list
+
+aptitude  é o nome do apt-get
+
+atualizar apenas um pacote apt-get install --only-upgrade pacote
+
+apt-get é um gerenciador de pacote, aonde ele instala o pacote em questão e suas dependencias, mas busca do sources.list
+o dpkg é a solução para pacotes isolados pacotes que estão fora de alguma sources.list dpkg -i
+
+
+apt-get -f install o '-f'  instala as dependencias mas não instala o pacote
+
+
+dpkg --list mostra todos os pacotes
+
+sudo ip route add default via ip
+
+FERRAMENTAS UTEIS_________________________________________________________________________
+stress stress-ng
+stress-ng --cpu 2 --vm 1 --hdd 1 --fork 1 --switch 1 --timeout 5000 --metrics
+nc -vz (host) (port) exc:192.168.1.1 8080 ping direto na porta
+scp copiar de um servidor para outro. scp -r -i [chave de acesso ao servidor].pem [diretório projeto Alura (default: site)] [usuário@DNS público do servidor na Amazon]:~
+SSH para gerar uma chave ssh.   ssh -t rsa vai gerar chave publica e privada
+ssh -i para colocar o caminho da chave ssh -i /home/daniel usuario@ip
+NOTA SOBRE AS CHAVES: chave publica sempre fica com o server enquanto a privada fica com quem está acessando.
+
+
+________________________________FEDORA________________________________________RPM
+
+rpm --query --all todos os pacotes que estão inslaados
+rpm -qa
+rpm -i instalar
+rpm -e apaga
+yum search 
+yum remove
+yum makecache
+yum info nome do pacote
+/etc/yum.conf
+
+yum é equivalente ao apt-get
+yum foi substituido pelo dnf
+
+
+_------------------------------LICENÇA------------------------------------
+GNU/GPL GENERAL PUPLIC LICENCE tipo de licença  
+
+compartilhar o codigo fonte, pode modificar e retrisbuir da maneira que quiser. Alterações continuam sendo GPL
+
+
+BSD lincence 
+Voce não pode utilizar o termo beartley como apoio. mas pode compartilhar o codigo fonte. e isenta o distribuidor de qualquer responsabilidade, pode ser compartilhado sem condigo fonte.
+a licença é open source mas a distruibuição não necessariamente seja 
+
+APACHE LICENCE
+não é necesario compartilhar o codigo fonte
+FIREFOX
+mozila public licence restribuir como mozila public license. a adicionar conteudo, o adicional não precisa continuar como mozila license.
+
+
+CREATIVE COMMONS
+
+BY
+essa licença permite que outros remixem,distribua,adaptem e criem a partir do seu trabalho, sem precisar pagar, apenas precisam dar credito.
+
+BY SA
+Deis que atribuam o devido credito para o autor, e a licença precisa ser herdada
+
+freesoftware fundation 
+criou a licença GPU richard Stallman
+FOSS free open source 
+FLOSS FREE LIBRE OPEN SOFTWARE
+BSD
+eula end-user licence agrement 
+
+FORMAS DE NEGOCIO OPEN SOURCE
+Dual licensing  uma para uso não comercial, e outra para uso comercial.
+Vendendo serviços, suporte,certificação.
+vendendo produtos da ferramenta (camisetas,bones)
+pode usar o produto mas não pode falar.
+software como serviço
+parceria
+doações
+desenvolvimento baseado em premio 
+ADOM
+re-licenciar
+
+PAAS plataforma como serviço
+Iaas Infraestrutura como serviços
+Saas software como serviço
+
+OPEN SOURCE INITIATIVE
+
+Bash é um dos shell mais comuns do linux
+
+terminal programa
+console conectado ao teclado e o monitor virtual
+programa Bash
+
+o terminal é uma aplicação que vai rodar o console
+
+
+SHELL
+type (comando) mostra o tipo de comando
+-a mostra tudo -all
+-t tipo
+help (comando) ajuda  a achar informação sobre o console
+
+ls lista os arquivos 
+ls -l lista com permissão
+ls -a lista arquivos ocultos 

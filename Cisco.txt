@@ -1,0 +1,225 @@
+rganização que controla ips
+
+Iana
+
+RIRs
+
+ip privado
+
+192.168...
+10.0.0
+172.16..
+
+
+IPV6
+abreviações para o ipv6 
+:: para um cojunto de varios 0000
+link local começa com FE80
+
+cada intervalo tem 16bits e o endereço completo tem 128 bits
+
+EUI 64  é a converção link local que  a cisco usa nos equipamentos 
+
+neighbor discovery protocol (NDP) MULTIcast
+
+endereço mult cast FF02::1
+
+NDP manda uma  solicitação para o endereço de multi cast FF02::1:FF (ultimos 24 bits do host) com um append os ultimos 24 bits do ip que ele está prcourando.
+
+NS Neghbor solicitation
+NA Neighbor Attachment
+
+FF02::2 multcast para roteador
+
+RS: Router Solicitation
+RA : Router advertisement 
+
+Staticless auto configuration SLAAC
+o processo aonde o computador pergunta para o roteador a rede para ele poder se auto configurar
+
+ipv6 unicast-routing eleva o roteador para um roteador de ipv6 respondendo pelo endereço multicast FF02::2
+
+Any cast comunicação com  o serviço mais proximo
+
+FC00 unique local 
+global adress comunicação com a internet
+
+GLOBAL PRÉFIX>>>>> SUBNET ID >>>>INTERFACE ID
+
+_-------------------------------------------------SWITCHS----------------------------------------------------------------
+em uma tabela de mac (show mac-address-table) o type dinamico é quando o switch aprendeu o mac quando foi iniciado uma comunicação
+flame flooding (passar a informação para todas as portas, com excessão da porta que enviou a mensagem)
+
+(config-if) speed determina velocidade 10 ou 100 ou auto
+(config-if) duplex determina o tipo de duplex auto full ou 
+(config) interface range fastethernet 0/11-20 configuração para range de porta
+
+(config) Vlan numero da vlan.  para criar a vlan
+
+Vlans
+Vlans dividem o dominio de broadcast deixando cada vlan com o seu proprio dominio.
+(config-if) switchport access vlan 10 para switch acessar a vlan 10 ( caso a vlan não tenha sido criada até esse momento. o swtich cria)
+
+Vlan Default vem por padrão como 1 
+Native Vlan é a vlan utilizada para trocar informações de gerenciamento 
+(Config-if)switchport trunk native vlan 999 altera a vlan nativa 
+
+VLAN TRUNKING PROTOCOL VTP
+VTP vem cpnfigurado como server no switch
+VTP DOMAIN "nome do dominio"  para as configurações de VTP sejam compartilhada entre os switchs, precisam estar no mesmo dominio
+VTP mode client ou server para mudar o mode caso o switch esteja como client ele não consegui criar vlan
+para as vlans passarem de um switch server para os clients, as portas conectadas precisam estar em trunk
+não é possivel criar uma vlan em um switch no modo client
+VTP MODE transparent o switch passa as configurações de VLAN
+
+CDP Cisco discovery protocol
+funciona apenas em dispositivos da cisco
+
+show version  mostra a versão do equipamento 
+show cdp neighbors
+local interface(inrerface local) Capability(tipo de equipamento) port ID (porta do vizinho)
+
+LINK LAYER DISCOVERY PROTOCOL
+LLDP igual o CDP mas é uma tecnologia aberta
+
+trunk
+802.1q e o ISL são os protocolos utilizado para porta trunk 
+Show interfaces trunk  MODE "on" que dizer que a porta foi setada para trabalhar em trunk. caso o MODE esteja em 'auto' foi configurado por negociação
+
+switchport port-security
+antes de habilitar o port security deixar a porta em modo de acesso
+switchport port-security maximum "x" se a porta identificar que existe mais de "x" dispoitivos a porta é desabilitada
+para reativar a porta é necessario desligar a porta e ligar novamente 
+switcport port-security mac-address stick para aceitar somente a conecxão do mac que estiver conectado na hora
+switchpor port-security violation protect= não desabilita a porta. apenas bloqueia o trafego não incrementa violação de segurança
+switchport port-security violation restrict= não desabilita a porta. mas conta a violção de segurança
+switchport port-security violation shutdown= desliga a porta  e incrementa violação de trafego
+err-disabled. interface deu shutdown por causa de uma violação de segurança
+
+
+show interfaces porta
+reliability 255/255 duração da porta
+tx transmissão saida rx recepção entrada
+mostra dados de entrada e saida
+
+cam table(tabela de endereço MAC)
+
+
+PROTOCOLO ETHERNET
+
+DECADA DE 70 XEROX 3 Mb
+80 adotado por outras fabricantes 10 Mb
+90 mudança para o padrão para fastethernet 100 Mb
+00 Gigabitethernet 1000 Mb
+bit é ou 0 ou 1
+conjunto de 8 bits é um byte
+um byte x1024 = 1 kilobyte
+1 kilobyte x1024 = 1 megabyte
+1megabyte x1024	= 1 Gigabyte
+
+anycast= melhor caminho endereço mais proximo
+falando de velocidade é sempre bits
+b=bit
+B=byte
+
+___________________________ Quadro ETHERNET________________________________________________________
+Preamble=usado para sincronizar os dipositivos
+Startrame Delimiter= Usado como limitador  entre sincronização e dados a serem processados
+destination= MAC DESTINO
+source=mac de origem
+type=usado para indicar o protocolo que vai encapsular esse quadro
+Data= dados
+frame checj sequence- numera os pacotes para verificar erros
+Quando usado uma vlan o quadro ethernet sofre uma alteração a tag vlan é incluida para identificar a vlan 
+
+CSMA/CD conjunto de regras
+O CSMA / CD seria um conjunto de regras utilizados pelo protocolo Ethernet com 
+o objetivo de permitir a comunicação com o mesmo nível de prioridade de acesso entre os dispositivos, evitando colisões
+HUB= um dominio de colisão.
+switch trabalhando em full duplex. é um dominio de colisão por porta 
+O roteador vai ter um dominio de broadcast por porta 
+auto negociação
+se não houver nenhuma comunicação pelo periodo de 5 minutos, o mac é excluido da tabela(mac-address aging)
+
+____________________________________________Voip____________________________________________________________
+Voip tem a priorização de  trafego
+
+
+
+_________________________________________Router_______________________________________________________________
+
+Configurar DHCP
+(config) ip dhcp excluded-address 192.168.1.1 192.168.1.10 excluir range de ip do dhcp
+(config) ip dhcp pool (nome vlan)
+(dhcp-config) network 192.168.1.0 255.255.255.0 para rede
+(dhcp-config) default-router 192.168.1.1 para roteador padrão
+(dhcp-config) dns-server  8.8.8.8 para dns 
+
+OSPF
+(config) route ospf  1 .1 sendo a identificação do ospf
+(config) network 192.168.1.1 0.0.0.255 area 1  no ospf usar mascara coringa e definir area
+
+
+SHOWS
+show ip route mostrar tabela de roteamento
+
+ADICIONAR ROTA STATIC
+ip route (ip da rede que uqero alcançar) (sub rede) (ip do proximo salto)
+rota de saida default-router
+ip route 0.0.0.0 0.0.0.0 (ip do proximo pulo)
+ip route (ip da rede que quero alcançar) (mascara de subrede) (ip do proximo salto) (peso)--- maximo 255
+rota estatica para um host
+ip route (ip da maquina) 255.255.255.255. (proximo salto)
+
+
+RIPv1
+padrão classfull
+não suporta autenticação
+broadcast
+RIPv2
+padrão classless
+suporta authenticação
+multicast
+
+RIP encherga a melhor rota como a que tem menos saltos 
+
+
+Distancia administrativa AD
+Distancia administrativa determina a melhor rota quanto menor melhor
+
+diretamente conectado valor=0 entrada na tabela =C
+rota estatica valor=1 entrada na tabela =S
+BGP           valor=20  entrada de tablea =B
+EIGRP         valor =90  entrada na tabela= D
+OSPF          valor=110   entrada na tabela=O
+RIP           valor=120   entrada na tabela=R
+
+metrica é o que determina o melhor caminho
+_______________________________________________FIREWALL______________________________________________________
+INTRUSION DETECH SYSTEM apenas alerta sobre alguma possivel invasão  IDS
+intrusion preventch system  vê alguma ação fora do padrão e bloqueia o acesso IPS 
+
+access-list (nome AC) (permit ou deny) (protocolo) (origem) (destino)
+
+adicionar a AC na interface 
+access-group (nome da AC) (sentido da interface in ou out) interface (nome da interface)
+
+rota estatica no firewall
+
+route (nome da interface que esta conectado ao proximo salto ) (ip da rede) (mascara) (interface do proximo salto)   opcional eq (numero da porta)
+DHCP
+dhcpd address (ip de inicio)-(ip final) (nome da interface)
+dhcpd dns (ip do dns)
+dhcpd enable (nome da porta)
+
+NAT
+object network (nome_objeto)
+subnet (rede) (mascara)
+nat (inside,outside) dynamic interface
+
+
+
+
+
+
+

@@ -1,0 +1,19 @@
+Protoclo para fazer o scanning do windows 
+WMI
+
+
+ASSET EXPLORER usuario
+
+
+Scan windows domain	porta 389
+agent less ports TCP/135,445
+
+o WMI precisa estar habilitado em todas as maquinas do dominio
+
+Com/Dcom o serviço precisa estar habilitado no servidor do asset explorer.
+
+Agent
+
+scanear usando agent 9000
+
+remote control 10443

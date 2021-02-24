@@ -1,0 +1,14 @@
+os agentes se comunicam por HHTTPS na porta 443 apenas precisa liberar a saida
+
+somente adminstradores podem gerar automação
+
+agentes em linux são desenvolvidos em python e usam comandos de shell para coletar dados como top,free,df,ps
+/opt/site24x7
+
+integrações de plugin
+para windows pode usar powershell,VB,BATCH,DLL
+
+linux 
+python e shell todos os arquivos de plug in são de codigo aberto
+
+

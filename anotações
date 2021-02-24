@@ -1,0 +1,29 @@
+repositorios de pacote, aonde o apt-get busca os pacotes
+
+apt-get remove nome do pacote  serve para remover o pacote
+apt-get purge nomedopacote serve para remover o pacote e as configurações adicionais junto
+
+/etc/apt/sources.list
+
+aptitude  é o nome do apt-get
+
+atualizar apenas um pacote apt-get install --only-upgrade pacote
+
+apt-get é um gerenciador de pacote, aonde ele instala o pacote em questão e suas dependencias, mas busca do sources.list
+o dpkg é a solução para pacotes isolados pacotes que estão fora de alguma sources.list dpkg -i
+
+
+apt-get -f install o '-f'  instala as dependencias mas não instala o pacote
+
+
+dpkg --list mostra todos os pacotes
+
+
+________________________________FEDORA________________________________________
+
+rpm --query --all todos os pacotes que estão inslaados
+rpm -qa
+rpm -i instalar
+rpm -e apaga
+
+yum é equivalente ao apt-get

@@ -1,0 +1,231 @@
+MCSA
+
+em 2008 no cmd winrm /quickconfig para a area remota 
+
+RSAT  serve para administrar servidores em uma  maquina desktop 
+
+melhor processo para atualizar o windows server é fazer ele do 0
+
+na tela de instalação do windows shift+f10 abre o cmd
+
+diskpart
+
+list disk 
+select disk (numero do disco)
+Clean (formatar tirar partições)
+
+requisitos minimos do windows server 2016
+minium 1.g GHz
+512 ram
+32 GB 
+gigabit
+
+windows server essentials max 25 dispositivos e 50 users não tem suporte para virtualização. GUI mais simples
+
+datacenter HYPER V  blindada
+standard container no max 2. 2 maquinas virtualizadas e host hyper V 
+
+
+sigverif ???
+
+verifier???
+_____________________________________________________________________________________________________________________---------
+ferramentas para linha de comando
+netdom para renomear computadores
+netsh configuração de rede
+ocsetup (obsoleto)
+Cscript para fazer ativação do windows
+
+-ato para linha de comando o -ato significa que o windows vai tentar se ativar online
+
+
+NIC Teaming redundancia em placa de rede  no minimo 2 no max 32
+_________________________________________________________________________________________________________________________________-
+HYPER-V
+Recondação que o HYPER-V tenha suas VMs em outra HD
+NUMA ele vai particionar as memorias em bloco, assim deixando mais rapido para o processador trabalhar e ficando mais rapido 
+migrações ao vivo, transferir maquinas virtuais a quente
+politica de modo de replicação, divide os recursos que estão no endpoint para o servidor 
+configuração de replicação= faz a copia de um servidor. consegui fazer um backup incremental
+todas as maquinas usando o hyper-V tem os 3 primeiros octetos iguais na placa de rede 
+Habilitar SR-IOV aumenta a capacidade de rede  mas pouco utilizado porque poucas placas tem essa função
+ID da vllan, colocar a identificação da Vlan 
+
+MEMORIA 
+use a memoria dinamica. deixar que o windows gerencie a memoria 
+
+SCSI adicionar firmaware no quente
+
+Dentro do HYPER-V tem a opção de editar e inspencionar disco disco, é possivel aumentar o tamanho de um disco  que ja existe, o disco dinamico não retrocede.
+
+conseguimos trocar uma HD  que foi criada em tamanho dinamico para fixo e vice e versa.  conseguimos expandir o tamanho da HD e tambem compactar o tamanho de um 
+HD dinamico 
+
+A MAquina virtual é dividida em algumas partes. exemplo: HD,configuração da maquina, ponto de verificação(snapshot) e paginação inteligente.
+quando vamos mover a maquina existe como mover apenas o HD, ou todo resto, inclusive mover para locais diferentes 
+Exportar é mais eficiente para usar ela em outro servidor. e exportar mantem os arquivos 
+
+na hora de importar uma maquina podemos importar ela in-loco e fazer com que ela trabalhe de onde está. 
+restaurar vai copiar a maquina para dentro do servidor 
+ 
+_____________________________________________________________________________________________________________________---------
+Domain controller
+
+Primary domain controller Aonde fica o banco de dados do AD tem full acesso 
+Backup Domain Controler caso o primary caia o backup domain assume 
+REad-only Domain Controler Apenas um repetidor não pode escrever no banco do dominio. repetidor em cache, não replica para outros ADs. precisa configurar nos grupos as permissoes 
+Locked Down Domain Controler
+
+_____________________________________________________________________________________________________________________---------
+AD
+pasta=container
+View advanced feature para poder ter uma visão avancçada do ad, inclusive ver aba objects do windows aonde podemos tirar a opção de proteção contra a exlusão 
+
+Dar permissão a um usuario a uma OU clique com o botão direito em cima da OU delegar controle 
+
+PERFIL
+mandatorio= fazer com que todas as configurações do usuario dentro do seu perfil, sejam apagadas após  ele deslogar, para fazer isso é necessario mudar o arquivo 
+ntuser.dat para ntuser.man
+scripts de logon de usuario tem que ficar na pasta sysvol c:\windows\sysvol\sysvol\dominio\scripts
+
+GRUPOS
+TIPO DE GRUPOS
+SEGURANÇA: para permissões NTFS
+Distribuição para e-mail
+
+ESCOPO de grupo
+global só pode membro do mesmo dominio
+universal, pode ter de qualquer parte da floresta 
+
+sempre que rebaixar um controlador de dominio. é necessario tirar ele do AD e reiniciar o controlador principal
+
+CRIAR UM ARQUIVO DO AD para IFM
+ntdsutil
+activate instance (nome da instancia)
+ifm
+create full  (local aonde o AD vai ser copiado)
+_____________________________________________________________________________________________________________________---------
+BACKUPs
+
+Ao fazer um backup full o windows desmaca a opção de  "arquivo está pronto para ser arquivado"  para quando os incrementais serem realizados eles apenas fazerem a copia
+ds arquivos que tiverem essa flag marcada. A flag ela é marcada automaticamente quando um arquivo ele é modificado.
+
+o windows ao criar qualquer arquivo marca a opção em propriedades>>> Avançado o arquivo está pronto para ser arquviado, mesmo desmarcando está opção quando o arquivo sofre
+alguma alteração essa opção volta a ser marcada, porque o windows faz backup apenas dos arquivos que tiverem marcado.
+
+BACK FULL>> capaz de fazer a restauração na hora. e ele remove a opção o arquivo está pronto para ser arquivado
+BACKUP incremental> ocupa menos espaço mas faz apenas backup daquilo que foi alterado no ambiente
+para retonar um ambiente é necessario fazer o backup full do dia mais proximo e depois fazer o incremental
+BACKUP diferencial > tem um acumulo de arquivos, podendo fazer a copia dos mesmo arquivo
+BACKUP copia parece o full mas não desmarca a opção.
+
+para restaurar o backup é necessario uma midia do windows e ir na opção restaurar
+
+Restaurar um Domain controller
+
+restauração autoratitativa
+modo de reparo de serviços 
+
+abrir cmd
+ntdsutil 
+actvate instance ( nome da intancia )
+authoritative restore
+_____________________________________________________________________________________________________________________---------
+
+MESTRE de operação
+
+
+netdom query fsmo
+
+mestre de esquema é a função que está responsabilizada por ter as informações de todos os objetos do AD só existe 1 por floresta
+mestre de nomeação controle de uso de nome de dominios  1 por floresta
+PDC manter o sincronismo no  relogio  primeiro servidor a receber a atualização  de senha do usuario 1 por dominio
+pools RID existe 1 por dominio
+Mestre de infraestrutura responsavel por receber ausuarios e grupos. ele não é necessario no catalogo global. 1 por dominio 
+
+DEVE SER FEITO NO NOVO MESTRE DE OPERAÇÃO
+
+para alterar as roles RID,Mestre de infraestrutura, PDC, abrir o AD botão direito em cima do dominio mestre de esquema.
+
+alterar o metre de nomeação Ad dominios e confiança. botão direito em cima do dominio mestre de operações 
+
+alterar função de responsabilidade. abrir CMD regsvr32.exe schmmgmt.dll abrir executar e digitar mmc adicionar "esquema do AD"
+clicar com o botão direito  no esquema do AD em alterar o controlador de dominio. clicar com botão direito novamente, mestre do esquema 
+
+por CMD
+ntdsutil 
+rolesconnections
+connect to server "nome do server"
+quit
+transfer infrastructure master
+transfer pdf
+transfer rid master
+_____________________________________________________________________________________________________________________---------
+
+Compartilhamento
+
+para ver todos os compartilhamentos fsmgmt.msc
+botão direito propriedades >>compartilhamento avançado 
+nomedo do compartilhamento se houver "$" a pasta fica invisivel
+
+UNC o caminho de rede 
+
+Ver todos os compartilhamentos da maquina fsmgmt.msc
+
+SMB  é utilizado a partir do windows 8
+
+tem como quebrar a herança
+
+
+botão direito na HD propriedades>>> cota, cota é feita para todos os diretorios, podendo configurar exceções em propriedades>>>cota>>> Advanced
+fsutil ferramenta do cmd para criar cotas
+
+FSRM-File server Resource manager
+serve para fazer cotas especificas em diretorio e tambem bloquear um tipo de de arquivo para algum diretorio
+
+NAMESPACE
+Namespace serve para colocar um nome a uma pasta compartilhada e ter varios compartilhamentos dentro de uma pasta para usar o name space é necessario instalar
+o DFS.
+NAMESPACE é um nome "fantasia" para um compartilhamento, podendo ser utiizado o servidor ou o dominio. podemos criar redudancia de arquivo atravez de sincronismo
+mas a reduncia de name space é feito adicionando mais de um servidor ao namespace.
+
+Arquivo em sombra (versionamento de arquivos) é adiciona igual a quota feito em uma unidade correta. ativar copia de sombra é um procedimento pesado
+DFSCMD para administrar namespace por cmd
+
+VSSadmin para gerenciar copia de sombra 
+
+Data deduplication, retira os arquivos que estão duplicados dentro do servidor, é necessario instalar
+
+partição area fisica na HD
+volume acessar arquivos
+Deduplication é iniciada em volume 
+
+sincronização de arquivo, na hora de compartilhar o arquivo pode abrir o cache e escolher a forma de deixar o arquivo sincronizado. isso precisa ser
+aplicado pelo usuario tambem, botão direito na pasta "sempre disponivel" 
+
+PUBLICAR um compartilhamento no AD. no server aonde existe os compartilhamento abra o fsmgmt.msc com uma conta administrador de dominio. vá na aba publish.
+e publique os diretorios. depois abra o AD e crie uma OU para publicar os diretorios 
+
+icacls para configurar a aba segurança
+
+para compactar tamanho da pasta botão direito propiedades>> avançado compactar arquivos. arquivos criado dentro da pasta compactada são compactados automaticamente
+mas arquivos movidos não, é necessario fazer manualmente 
+
+Criptografar. ao criptografar um arquivo ou pasta, o acesso ainda é herdado da aba security. mas o usuario não pode ler ou escrever no arquivo.
+apenas se ele estiver com um certificado adicionado naquele arquivo. para adiiconar um certificado botão direito em cima do arquivo propriedades
+scriptografar aquivo avançado e adicionar. Mas só vai existir o certificado daquele usuario se ele já tiver feito alguma criptografia.
+
+para abrir arquivos sciptografados. precisamos ir no domain controller logar como administrador  abrir o executar digitar "mmc" file>>> add snap in conta atual
+e exportar o certficado .pfx do usuario administrador para a maquina  
+
+
+
+
+
+
+
+
+
+
+
+

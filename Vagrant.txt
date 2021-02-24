@@ -1,0 +1,40 @@
+vagrant init (nome da box)
+vagrant up caso a maquina não esteja criada ele cria a maquina  e tambem aplica as configurações
+--provider configurar o hypervisor que vai ser o provedor
+
+vagrant destroy deleta a maquina
+-f força o delete
+vagralt halt pausa a maquina 
+vagrant ssh-config vê as configurações de SSH
+vagrant ssh se  conecta via ssh
+
+nome da função (maquina).vm.provider "nome do provedor" do |nome da função|
+função.memory = definir memoria 
+função.cpus = definir cpus
+
+
+
+
+
+
+
+
+
+
+
+VAGrantfile
+config.vm.network "public_network", ip: "192.168.1.17" seta uma placa de video em bridge
+config.vm.network "forwarded_port", guest: 80, host: 8080 seta um port foward aonde a maquina do hypervisor=host encaminha a requisição da porta escolhida para a 
+maquina guest= maquina virtual.
+config.vm.network "public_network", ip: "192.168.0.17"  deixa a placa em bridge e seta um ip fixo
+config.vm.network "public_network", bridge "nome da interface" escolhe a interface que voce quer fazer o bridge
+config.vm.synced_folder " caminho da pasta na maquina host", "caminho da pasta na maquina virtual " lembrando que "./" o "." representa o diretorio atual da maquina.
+config.vm.synced_folder ".", "/vagrant", disabled: true para desabilitar o caminho padrão do vagrant.
+config.vm.provision "shell", inline: " comando" lembrando que precisa ser um comando valido na shell
+
+
+
+
+
+
+ 

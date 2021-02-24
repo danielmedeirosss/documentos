@@ -1,0 +1,42 @@
+portas da aplicação 
+13306 TCP Database postgress
+1433 TCP MSSql
+23 SSH
+8060 WEB portas
+7275 Remote Desktop
+portas para scan
+SNMP 161 UDP
+SNMP 162 UDP
+WMI 135 TCP
+WMI 445 TCP
+TELNET 23 TCP
+SSH 22 TCP
+ICMP
+SYSLOG 514
+WEB 443/80
+
+Evitar fazer o scan de devices não criticos
+
+Hardware
+1 to 250 2.0 GHZ 4/ 4 threads 4GB de ram 20 GB na  HD
+251 a 500 2.5Ghz 4 cores/8 threads 8 GB 20 GB na HD
+501 to 1000 2.5Ghz 4 cores/ 8 hreads 16 GB 40 GB na HD
+
+Protocolos para monitoramento 
+SNMPv1,SNMPv2,SNMPv3,WMI,TELNET,SSH,VMWare,Citrix,UCS.
+
+WMI
+È bom ter uma credencial com privilegio
+
+Erros ao aidiconar um devices
+Add Device Failed - Device Name : Problem in adding the device, please contact
+support with support information file:
+This error is exclusive to SNMP devices. This error is triggered even though the device you are attempting to add is pingable. The reason this is
+happening is because the Sysname turns up empty when trying to fetch the device details.
+Solution
+Sysname is a mandatory field, make sure this field is populated before attempting to add the device. To verify the status of the Sysname, query the
+SNMP device to check if the SysName (.1.3.6.1.2.1.1.5) returns a value.
+
+
+
+
