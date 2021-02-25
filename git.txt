@@ -17,7 +17,8 @@ git log --oneline (para mostrar em uma linha)
 gitlog -p  (mostrar com mais detalhes) 
 --graph (mostra um grafico de linhas de branchs)
 
-git config --local
+git config 
+--local ( todos os commits dados neste local ficam para este usuario)
 user.name "nome"
 user.email(email)
 
@@ -43,4 +44,24 @@ git checkout (nome do branch)
 para fazer o merge  faça a alteração vá muda para o master
 git merge (nome do branch)
 
+para voltar o status do codigo antes do commit.
+git checkout -- (nome do arquivo)
+
+Caso eu já tenha marcado para commitar mas ainda não commitei
+git reset head (nome do arquivo)
+
+
+para desfazer um commit especifico
+git reverse (hash do commit)
+
 git rebase (nome do branch) para deixar todos os logs na mesma branch
+
+git stash (salva o arquivo tipo um save rapido)
+list para listar
+
+git stash apply (numero da stash) para aplicar o stash
+git stash drop ( retira a ultima stash)
+git stash pop  tira da stash a ultima stash e aplica as configurações 
+
+git checkout (hash do commit) com este comando vc vai retonar o arquivo para o estado do commit
+mas caso vc precise continuar ele preicsa criar um novo branch
