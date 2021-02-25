@@ -15,6 +15,7 @@ git log
 para pegar os logs do git
 git log --oneline (para mostrar em uma linha)
 gitlog -p  (mostrar com mais detalhes) 
+--graph (mostra um grafico de linhas de branchs)
 
 git config --local
 user.name "nome"
@@ -38,3 +39,8 @@ git push (nome do local) (nome da branch) para enviar os arquivos
 git branch (nome do branch)
 git branch  para mostrar todos os branchs 
 git checkout (nome do branch)
+
+para fazer o merge  faça a alteração vá muda para o master
+git merge (nome do branch)
+
+git rebase (nome do branch) para deixar todos os logs na mesma branch
