@@ -10,6 +10,9 @@ flags
 -p mapear a porta do container (porta host):(porta container)
 --name (nomeda imagem)
 -e variavel de ambiente
+-v (endereço externo no host):(endereço interno) (nome da iagem)
+-w para  direcionar o shell para um diretorio ("caminho")
+--network (para atrelar ele na rede) docker network create --driver (driver) (nome da rede)
 
 
 
@@ -18,6 +21,12 @@ Flags
 -a attach -i interativo usando docker start -a -i voce acessa o container 
 docker stop (id) para parar
 -t time colocar o numero de segundos do docker
+
+docker inspect (id do container)
+
+criando a propia rede no container
+docker network create --driver bridge (nome da rede)
+-ls para listar as redes
 
 
 
@@ -38,3 +47,20 @@ $() serve para agrupar um comando
 CASO ESTEJA USANDO O TOOLBOX e preicsa achar o ip da maquina 
 dockermachine ip
 
+para criar builds dentro do docker
+docker build
+-f (nome do arquivo)
+-t ( para tagear/ nome da imagem)
+
+docker login 
+para fazer login no docker hub
+
+
+docker build 
+FROM node:latest ( from pegando outra iamgem como base)
+MAINTAINER Ubuntu  (o mantenedor)
+COPY . /var/www (copy copiar um arquivo para dentro (caminho host) (caminho container)
+WORKDIR /var/www (workdir para colocar oshell no diretorio)
+RUN npm install ( run rodar comando)
+ENTRYPOINT npm start (rodar comando)
+EXPOSE 3000 ( expose expo a porta)

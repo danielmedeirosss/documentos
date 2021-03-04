@@ -68,3 +68,5 @@ mas caso vc precise continuar ele preicsa criar um novo branch
 
 git diff (hash do commit)..(hash do commit) para ver diferenças de um commit até o outro 
 git diff mostra as alterações de um arquivo que foi alterado mas ainda não commitado
+
+git tag -a (nome da tag) -m (mensagem)
