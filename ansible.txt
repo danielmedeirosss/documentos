@@ -1,0 +1,2 @@
+ansible [nome do grupo] -u (usuario) --private-key (caminho da chave privada) -i (nome do iventario)-m (module) -a (argumento)
+-vvv rodar em modo verboso
