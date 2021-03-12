@@ -1,0 +1,4 @@
+terraform init ( para iniciar o terraform naquele diretorio)
+terraform plan ( ele vai planejar e retornar as mudanças  dos arquivos)
+terraform apply ( aplicar as mudanças)
+terraform show ( mostrar o ambiente)
