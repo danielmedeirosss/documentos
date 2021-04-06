@@ -2,3 +2,11 @@ terraform init ( para iniciar o terraform naquele diretorio)
 terraform plan ( ele vai planejar e retornar as mudanças  dos arquivos)
 terraform apply ( aplicar as mudanças)
 terraform show ( mostrar o ambiente)
+terraform -destroy -target (nome do recurso) para deletar
+terraform refresh ele faz um reload
+/*
+
+conteudo
+
+*\
+para comentar

@@ -15,6 +15,9 @@ flags
 --network (para atrelar ele na rede) docker network create --driver (driver) (nome da rede)
 
 
+DOCKER info
+para ver detalhes 
+
 
 docker start  (id do container) para startar ele
 Flags
@@ -64,3 +67,48 @@ WORKDIR /var/www (workdir para colocar oshell no diretorio)
 RUN npm install ( run rodar comando)
 ENTRYPOINT npm start (rodar comando)
 EXPOSE 3000 ( expose expo a porta)
+
+
+
+DOCKER-MACHINE
+Cria uma maquina ja com o docker instalado nela. 
+docker-machine create -d virtualbox --virtualbox-no-vtx-check (nome da VM)
+
+ 
+
+DOCKER swarm 
+
+Docker swarm init( para inicar o swarm na maquina)
+flags
+--force-new-cluster
+docker service create  -p 8080:3000 (nome do container) (apenas feito no swarm)
+flag --mode replicated OU Global (no modo global ele cria uma tarefa em todos os nós)
+docker service rm (id do serviço)
+docker service rm $(docker servicels -q) para deletar todos os serviços 
+docker swarm join-token worker (pegar o tolkien para add um worker)
+docker swarm join-token manager (para adicionar um manager)
+
+docker node ls (mostrar estado dos nos) apenas no swarm manager
+exibiir somente a coluna que vc deseja --format "{{.nome da coluna}}"
+docker service ls (mostra todos os serviços)
+docker service ps (nome do serviço) mostra aonde o serviço está rodando
+docker node inspect (nome da VM). para fazer o backup do swarm copie esta pasta de volta para o caminho
+e inicie com a flag --force-new-cluster
+ROUTING MESH
+faz que qualquer requisição feita para um membro do swarm seja checada em todo  os nos
+utilizando a rede ingress, a rede ingress é iniciada quando o comando docker swarm init é utilizado.
+esta rede é iniciada em todos os containers que existem dentro de um swarm e utiliza o driver overlay
+docker node rm (id do docker) para remover um container da swarm ( precisa primeiro dar o leave no container)
+docker swarm leave ( para tirar o nó  do swarm)
+flags
+--force para forçar a saida
+/var/lib/docker/swarm fica o backup do swarm 
+
+docker node demote (nome do swarm) para rebaixar o swarm
+docker node update --availability drain (nome do container) ( para  o serviço  nao rodar neste container)
+docker service update --constraint-add node.role==worker (id do serviço)
+docker serice update --replicas 4 (nome do serviço) para replicar o serviço que está rodando.
+
+
+docker stack  deploy --compose-file (nome do arquivo) (nome  do stack)
+
