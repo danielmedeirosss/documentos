@@ -1,0 +1,11 @@
+kubectl get nodes para listar todos os nodes
+não temos controle sobre o ip dos pods, a principal diferença entre pod e container é que um pod, pode ter amsi de um container.
+o pod só é finalizado se todos os containers dentro dele estiverem fora. 
+
+kubectl run ( nome da imagem)
+kubectl get pods ára ver os pods
+flags --watch para ver atualização em tempo real
+kubectl apply  -f (caminho do arquivo yaml)
+kubectl delete pod (nome do pod)
+kubectl delete -f  (caminho do arquivo)
+kubectl exec -it (nome do pod) -- bash (para acessar o pod)
